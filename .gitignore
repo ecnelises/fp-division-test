@@ -1,0 +1,4 @@
+*.s
+*.o
+fdiv-test
+a.out
