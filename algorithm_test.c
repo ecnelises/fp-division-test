@@ -101,13 +101,6 @@ double err(float a, double b) {
   }
 }
 
-int get_next() {
-  static int group[] = { 1, 4, 7, 10, 100, 1000, 3000, 10000, 20000, 30000 };
-  static int n = 0;
-  if (n > 8) n = 0;
-  return group[n++];
-}
-
 int main() {
   int i, j;
   unsigned long long tests = 0;
