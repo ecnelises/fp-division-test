@@ -1,3 +1,12 @@
+/*
+ * compiling_test_set.c
+ *
+ * This program is to test accuracy of division estimation between Clang and
+ * GCC. It uses a set of random floating point numbers.
+ *
+ * Thanks to Masoud Ataei Jaliseh for contributing test.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,6 +52,7 @@ int main() {
     z = (double)inputs[2 * i].f / (double)inputs[2 * i + 1].f;
     x = fdiv_gcc(inputs[2 * i].f, inputs[2 * i + 1].f);
     y = fdiv_clg(inputs[2 * i].f, inputs[2 * i + 1].f);
+
     err_gcc = err(x, z);
     err_clg = err(y, z);
     if (err_clg - err_gcc < 0.5)
@@ -50,5 +60,6 @@ int main() {
   }
 
   printf("Accurate rate: %d/%d\n", res, len / 2);
+
   return 0;
 }
