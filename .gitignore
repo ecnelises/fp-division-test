@@ -1,4 +1,6 @@
 *.s
 *.o
-fdiv-test
+algorithm-test
+compiling-test
+compiling-test-set
 a.out
