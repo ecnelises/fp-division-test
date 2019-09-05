@@ -32,8 +32,10 @@
 
 #include <xmmintrin.h>
 
+// Native division
 float div_ieee(float x, float y) { return x / y; }
 
+// Multiply native reciprocal instruction result without iterations
 float div_est(float x, float y) {
   float est;
   __m128 vecY = {y, 0, 0, 0};
@@ -43,6 +45,7 @@ float div_est(float x, float y) {
   return est;
 }
 
+// Multiply native reciprocal result with 1 iteration
 float div_est_NR1(float x, float y) {
   float est;
   __m128 vecY = {y, 0, 0, 0};
@@ -53,6 +56,7 @@ float div_est_NR1(float x, float y) {
   return est;
 }
 
+// Multiply native reciprocal result with 2 iterations
 float div_est_NR2(float x, float y) {
   float est;
   __m128 vecY = {y, 0, 0, 0};
@@ -64,6 +68,7 @@ float div_est_NR2(float x, float y) {
   return est;
 }
 
+// Multiply first and do iteration for once
 float div_est_new(float x, float y) {
   float est;
   __m128 vecY = {y, 0, 0, 0};
@@ -159,9 +164,7 @@ int main() {
     }
   }
   printf("Total tests = %llu\n", tests);
-  printf("Inaccurate estimation: %llu\n", bad_ORI);
-  printf("Inaccurate NR1 estimation: %llu\n", bad_NR1);
-  printf("Inaccurate NR2 estimation: %llu\n", bad_NR2);
-  printf("Inaccurate NEW estimation: %llu\n", bad_NEW);
+  printf("Accurate numbers in OLD way: %llu, accuracy ratio: %.4lf", (tests - bad_NR1), (double)(tests - bad_NR1) / tests);
+  printf("Accurate numbers in NEW way: %llu, accuracy ratio: %.4lf", (tests - bad_NEW), (double)(tests - bad_NEW) / tests);
 	return 0;
 }
